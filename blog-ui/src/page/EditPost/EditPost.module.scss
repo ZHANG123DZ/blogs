@@ -1,0 +1,35 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  background: #1a1a1a;
+  border-radius: 16px;
+  max-width: 600px;
+  margin: 32px auto;
+}
+
+input,
+textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #2a2a2a;
+  color: white;
+  resize: vertical;
+}
+
+button {
+  background: #ff2c55;
+  border: none;
+  padding: 12px;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #e3264f;
+}
