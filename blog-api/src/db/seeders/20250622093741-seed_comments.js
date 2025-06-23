@@ -19,7 +19,7 @@ module.exports = {
 
     const comments = [];
 
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 300; i++) {
       const post = faker.helpers.arrayElement(posts);
 
       const isReply = i > 5 && Math.random() < 0.4 && comments.length > 0;

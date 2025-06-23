@@ -3,9 +3,11 @@ import styles from "./ArticleCard.module.scss";
 
 import postService from "@/services/post/post.service";
 import { Link, useParams } from "react-router-dom";
+import nestComments from "@/function/nestComments";
 
 function ArticleDetail() {
   const [post, setPost] = useState({});
+  const [comments, setComments] = useState([]);
   const params = useParams();
   const slug = params.slug;
 
@@ -13,7 +15,7 @@ function ArticleDetail() {
     const getAll = async () => {
       try {
         const postData = await postService.getOne(slug);
-        console.log(postData);
+        setComments(nestComments(postData.data.Comments));
         setPost(postData.data);
       } catch (error) {
         console.log(error);
@@ -33,6 +35,7 @@ function ArticleDetail() {
       console.log(err);
     }
   };
+
   return (
     <div>
       {post && (
@@ -48,6 +51,17 @@ function ArticleDetail() {
           <button className={styles.DeletePost} onClick={() => deletePost()}>
             Xóa bài viết
           </button>
+          <div>
+            <div style={{ fontSize: "18px" }}>Comments</div>
+            <br />
+            <ul>
+              {comments.map((item) => (
+                <li key={item.id} style={{ margin: "20px" }}>
+                  {item.content} {item.parent_id && <ul></ul>}
+                </li>
+              ))}
+            </ul>
+          </div>
         </>
       )}
     </div>

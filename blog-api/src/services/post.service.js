@@ -1,4 +1,4 @@
-const { Post, Topic } = require("@/models/index");
+const { Post, Topic, Comment } = require("@/models/index");
 const { nanoid } = require("nanoid");
 const { where, Op } = require("sequelize");
 const { default: slugify } = require("slugify");
@@ -8,7 +8,7 @@ class PostsService {
     const offset = (page - 1) * limit;
 
     const { rows: items, count: total } = await Post.findAndCountAll({
-      include: Topic,
+      include: [Topic, Comment],
       limit,
       offset,
       order: [["created_at", "DESC"]],
@@ -21,7 +21,7 @@ class PostsService {
     const isId = /^\d+$/.test(key);
     const post = await Post.findOne({
       where: isId ? { id: key } : { slug: key },
-      include: Topic,
+      include: [Topic, Comment],
     });
     return post;
   }
