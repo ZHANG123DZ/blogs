@@ -54,10 +54,13 @@ function ArticleDetail() {
           <div>
             <div style={{ fontSize: "18px" }}>Comments</div>
             <br />
-            <ul>
+            <ul style={{ marginLeft: "20px", listStyleType: "none" }}>
               {comments.map((item) => (
-                <li key={item.id} style={{ margin: "20px" }}>
-                  {item.content} {item.parent_id && <ul></ul>}
+                <li key={item.id} style={{ marginBottom: "8px" }}>
+                  <div>{item.content}</div>
+                  {item.children && item.children.length > 0 && (
+                    <CommentTree comments={item.children} />
+                  )}
                 </li>
               ))}
             </ul>
